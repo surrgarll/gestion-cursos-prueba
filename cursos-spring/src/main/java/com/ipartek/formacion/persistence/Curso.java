@@ -2,7 +2,7 @@ package com.ipartek.formacion.persistence;
 
 import java.io.Serializable;
 
-public class Curso implements Serializable {
+public class Curso implements Serializable,Comparable<Curso> {
 
 	/**
 	 * 
@@ -42,6 +42,11 @@ public class Curso implements Serializable {
 	@Override
 	public String toString() {
 		return "Curso [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
+	}
+	@Override
+	public int compareTo(Curso o) {
+		int numero=this.getId().compareTo(o.getId());
+		return numero;
 	}
 
 	

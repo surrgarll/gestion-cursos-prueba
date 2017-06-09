@@ -2,7 +2,7 @@ package com.ipartek.formacion.persistence;
 
 import java.util.List;
 
-public interface CursoDAO {
+public interface CursoDAO extends DAOSetter {
 	public List<Curso> getAll();
 	public Curso getById(Long id);
 	public Curso create(Curso curso);
