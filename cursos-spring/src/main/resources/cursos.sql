@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `cursos` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
+USE `cursos`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cursos
@@ -27,7 +29,7 @@ CREATE TABLE `curso` (
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `codigo` varchar(12) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +38,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+INSERT INTO `curso` VALUES (1,'PRUEBA DE MODIFICAR EL PRIMER CURSO','PDCPC0000001'),(4,'PRUEBA DE CREAR EL CUARTO CURSO','PDCCC0000004'),(5,'PRUEBA DE CREAR EL QUINTO CURSO','PDCQC0000005'),(6,'PRUEBA DE CREAR EL SEXTO CURSO','PDCSC0000006'),(7,'PRUEBA DE CREAR EL SÉPTIMO CURSO','PDCSC0000007'),(8,'PRUEBA DE CREAR EL OCTAVO CURSO','PDCOC0000008'),(9,'PRUEBA DE CREAR EL NOVENO CURSO','PDCNC0000009'),(10,'PRUEBA DE CREAR EL DÉCIMO CURSO','PDCDC0000010'),(11,'PRUEBA DE MODIFICAR EL UNDÉCIMO CURSO','PDCUC0000011'),(12,'PRUEBA DE CREAR EL DUODÉCIMO CURSO','PDCDC0000012');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +76,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoDelete`(IN `pid`INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoDelete`(IN `pid` INT)
 BEGIN
 DELETE FROM curso
 WHERE id=pid;
@@ -123,6 +126,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `cursoReadByName` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoReadByName`(IN `pnombre` VARCHAR(100))
+BEGIN
+SELECT id,nombre,codigo
+FROM curso
+WHERE nombre like '%pNombre%';
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `cursoUpdate` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -154,4 +178,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-12 14:19:28
+-- Dump completed on 2017-06-13 18:03:19
