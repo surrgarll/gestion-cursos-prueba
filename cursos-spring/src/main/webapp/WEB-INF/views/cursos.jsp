@@ -21,7 +21,7 @@
 <main>
 <section id="listadoCursos">
 <header><h2>Listado de cursos</h2></header>
-<a href="<c:url value='/addCurso' />">Nuevo</a>
+<a href="<c:url value='/cursos/addCurso' />">Nuevo</a>
 <table>
 	<thead>
 		<tr>
@@ -46,7 +46,7 @@
 	</c:forEach>
 </c:when>
 <c:otherwise>
-	<tr><td colspan="4">En breve mostraremos un listado de cursos</td></tr>
+	<tr><td colspan="4">"${mensaje}"</td></tr>
 </c:otherwise>
 </c:choose>
 </tbody>

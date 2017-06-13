@@ -12,6 +12,7 @@ public interface CursoService {
 	public Curso update(Curso curso);
 	public void delete(Long id);
 	public void setCursoDAO(CursoDAO cursoDao);
+	public List<Curso> getByNombre(String nombre);
 	
 
 }

@@ -8,7 +8,7 @@ public class Curso implements Serializable,Comparable<Curso> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final long CODIGO_NULO = -1;
+	public static final long ID_NULO = -1;
 	private Long id;
 	private String nombre;
 	private String codigo;
@@ -17,7 +17,7 @@ public class Curso implements Serializable,Comparable<Curso> {
 	
 	public Curso() {
 		super();
-		this.id=CODIGO_NULO;
+		this.id=ID_NULO;
 		this.nombre="";
 		this.codigo="";
 	}

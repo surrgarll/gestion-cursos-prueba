@@ -45,7 +45,7 @@ public class CursoDAOImpl implements CursoDAO {
 	@Override
 	public Curso getById(Long id) {
 		Curso curso=null;
-		final String SQL="call cursoReadById;";
+		final String SQL="call cursoReadById(?);";
 		curso=jdbctemplate.queryForObject(SQL, new CursoMapper(), new Object[]{id});
 		return curso;
 	}
@@ -69,9 +69,10 @@ public class CursoDAOImpl implements CursoDAO {
 		final String SQL="cursoUpdate";
 		this.jdbcCall=new SimpleJdbcCall(jdbctemplate);
 		jdbcCall.withProcedureName(SQL);
-		SqlParameterSource in=new MapSqlParameterSource() 
+		SqlParameterSource in=new MapSqlParameterSource()
+				.addValue("pid", curso.getId())
 				.addValue("pnombre", curso.getNombre())
-				.addValue("pcodigo", curso.getCodigo());			
+				.addValue("pcodigo", curso.getCodigo());
 		jdbcCall.execute(in);	
 		return curso;
 	}
@@ -86,5 +87,12 @@ public class CursoDAOImpl implements CursoDAO {
 
 	}
 
+	@Override
+	public List<Curso> getByNombre(String nombre) {
+		List<Curso> cursos=null;
+		final String SQL="call cursoReadByName(?);";
+		cursos=jdbctemplate.query(SQL, new Object[]{nombre}, new CursoMapper());	
+		return cursos;
+	}
 
 }

@@ -4,8 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cursos</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Cursos</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -18,6 +21,8 @@
 </ul>
 </nav>
 <main>
+<div id="buscador"><input type="text"/><button>Buscar</button></div>
+<p id="resultado"></p>
 <section id="listadoCursos">
 <header><h2>Listado de los últimos 10 cursos</h2></header>
 <table>
@@ -53,5 +58,30 @@
 <footer>
 Realizada por Ipartek Soc. Coop.
 </footer>
+	<script>
+	const url="http://localhost:8080/cursoweb/api/cursos/";
+	$(document).ready(function(){
+		$("#buscador button").click(function(event){
+			$.ajax({
+					url:url,
+					type:"GET",
+					data: {"paramBusq":$("#buscador input").val()},
+					dataType : 'json',
+					success :
+						function(json) {
+				        $('<h2/>').html("Resultado de búsqueda");
+				        for(var i = 0; i < json.length; i++){
+				        	var curso=json[i];
+				        	console.log(curso.nombre);
+				        }
+					},
+					error:
+						$('#resultado').html("Se ha producido un error.")
+				        	
+			});
+		});
+		
+	});
+	</script>
 </body>
 </html>
