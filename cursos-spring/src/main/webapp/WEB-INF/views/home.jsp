@@ -22,7 +22,10 @@
 </nav>
 <main>
 <div id="buscador"><input type="text"/><button>Buscar</button></div>
-<p id="resultado"></p>
+<section id="resultado">
+<header><h2></h2></header>
+
+</section>
 <section id="listadoCursos">
 <header><h2>Listado de los últimos 10 cursos</h2></header>
 <table>
@@ -59,24 +62,28 @@
 Realizada por Ipartek Soc. Coop.
 </footer>
 	<script>
-	const url="http://localhost:8080/cursoweb/api/cursos/";
+	const url="http://localhost:8080/cursoweb/api/cursos";
 	$(document).ready(function(){
 		$("#buscador button").click(function(event){
 			$.ajax({
 					url:url,
 					type:"GET",
 					data: {"paramBusq":$("#buscador input").val()},
-					dataType : 'json',
+					dataType : "json",
 					success :
-						function(json) {
-				        $('<h2/>').html("Resultado de búsqueda");
-				        for(var i = 0; i < json.length; i++){
-				        	var curso=json[i];
+						function(data) {
+						console.log(data);
+				        $("#resultado h2").html("Resultado de búsqueda");
+				        for(var i = 0; i < data.length; i++){
+				        	var curso=data[i];
 				        	console.log(curso.nombre);
 				        }
 					},
 					error:
+						function(){
 						$('#resultado').html("Se ha producido un error.")
+					}
+						
 				        	
 			});
 		});

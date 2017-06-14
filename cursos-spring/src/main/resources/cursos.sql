@@ -57,7 +57,7 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoCreate`(IN `pcodigo` VARCHAR(12),IN `pnombre` VARCHAR(100), OUT `pid` INT)
 BEGIN
-INSERT INTO curso (codigo,nombre)
+INSERT INTO cursos.curso (codigo,nombre)
 VALUES (UPPER(pcodigo),UPPER(pnombre));
 SET pid = LAST_INSERT_ID();
 END ;;
@@ -78,7 +78,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoDelete`(IN `pid` INT)
 BEGIN
-DELETE FROM curso
+DELETE FROM cursos.curso
 WHERE id=pid;
 END ;;
 DELIMITER ;
@@ -98,7 +98,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoReadAll`()
 BEGIN
-select id,nombre,codigo from curso;
+select id,nombre,codigo from cursos.curso;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -118,7 +118,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoReadById`(IN `pid`INT)
 BEGIN
 SELECT id,nombre,codigo
-FROM curso
+FROM cursos.curso
 WHERE id=pid;
 END ;;
 DELIMITER ;
@@ -139,8 +139,8 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoReadByName`(IN `pnombre` VARCHAR(100))
 BEGIN
 SELECT id,nombre,codigo
-FROM curso
-WHERE nombre like '%pNombre%';
+FROM cursos.curso
+WHERE nombre like CONCAT('%',pnombre,'%');
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -159,7 +159,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cursoUpdate`(IN `pcodigo` VARCHAR(12),IN `pnombre` VARCHAR(100), IN `pid` INT)
 BEGIN
-UPDATE curso
+UPDATE cursos.curso
 SET nombre=UPPER(pnombre),codigo=UPPER(pcodigo)
 WHERE id=pid;
 END ;;
@@ -178,4 +178,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-13 18:03:19
+-- Dump completed on 2017-06-14 17:36:55

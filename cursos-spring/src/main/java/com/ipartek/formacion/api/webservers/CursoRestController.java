@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.persistence.Curso;
@@ -32,11 +31,17 @@ public class CursoRestController {
 		ResponseEntity<List<Curso>> respuesta=null;
 		LOGGER.info(busq);
 		try{
-		List<Curso> cursos=cS.getByNombre(busq.toUpperCase());
-		respuesta=new ResponseEntity<List<Curso>>(cursos,HttpStatus.OK);
-		}catch(Exception e){
-			LOGGER.info(e.getMessage());
-		}
+			List<Curso> cursos=cS.getByNombre(busq.toUpperCase());
+			
+			if(cursos==null||cursos.isEmpty()||cursos.size()==0){
+				respuesta=new ResponseEntity<List<Curso>>(HttpStatus.NO_CONTENT);
+			} else{
+				LOGGER.info(String.valueOf(cursos.size()));
+				respuesta=new ResponseEntity<List<Curso>>(cursos,HttpStatus.OK);
+			}
+			}catch(Exception e){
+				LOGGER.info(e.getMessage());
+			}
 		
 		return respuesta;
 		

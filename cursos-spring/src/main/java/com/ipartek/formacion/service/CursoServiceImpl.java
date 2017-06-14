@@ -51,7 +51,7 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	public List<Curso> getByNombre(String nombre) {
 		
-		return null;
+		return cDao.getByNombre(nombre);
 	}
 
 
