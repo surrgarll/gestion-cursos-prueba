@@ -16,7 +16,6 @@
 <nav>
 <ul>
 	<li><a href="<c:url value='/cursos'/>">Gestor Cursos</a></li>
-    <li><a href="#">Importar fichero datos</a></li>
 
 </ul>
 </nav>

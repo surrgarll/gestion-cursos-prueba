@@ -1,5 +1,10 @@
 package com.ipartek.formacion.controller;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -100,6 +105,60 @@ public class CursoController {
 			respuesta="cursos";
 			return respuesta;
 		}
+		
+	}
+	
+	@RequestMapping(value="/importarArchivo")
+	public String importarDatos(Model model){
+		String respuesta="cursos";
+		 String csvFile = "C:\\Users\\curso.IPARTEKAULA\\Downloads\\cursos.csv";
+	        BufferedReader br = null;
+	        String line = "";
+	        String cvsSplitBy = ";";
+	        List<Curso> cursos=new ArrayList<Curso>();
+	        List<Curso> cursosinsertados=new ArrayList<Curso>();
+	        int i=0;
+
+	        try {
+
+	            br = new BufferedReader(new FileReader(csvFile));
+	            while ((line = br.readLine()) != null) {  
+	            	i=i+1;
+	                String[] campos = line.split(cvsSplitBy);
+	                if(!(campos.length<9)){
+		                Curso curso=new Curso();
+		                curso.setNombre(campos[1]);
+		                if (!campos[8].isEmpty())
+		                	curso.setCodigo(campos[8]);
+		                cursos.add(curso);
+	                }
+	            }
+	            for (Curso cursox:cursos){
+	            	cursosinsertados.add(cS.create(cursox));
+	            }
+	            model.addAttribute("listadoCursos", cursosinsertados);
+	            
+
+	        } catch (FileNotFoundException e) {
+	        	model.addAttribute("error", "No se ha encontrado el archivo a importar y los cambios no han podido realizarse.");
+	        	LOGGER.info(e.getMessage());
+
+	        } catch (IOException e) {
+	        	model.addAttribute("error", "Se ha producido un fallo al leer el fichero y los cambios no han podido realizarse.");
+	        	LOGGER.info(e.getMessage());
+	        }catch(Exception e){
+	        	LOGGER.info(i+ " "+e.getMessage());
+	        }
+	        finally {
+	            if (br != null) {
+	                try {
+	                    br.close();
+	                } catch (IOException e) {
+	                	LOGGER.info(e.getMessage());
+	                }
+	            }
+	        }
+		return respuesta;
 		
 	}
 	

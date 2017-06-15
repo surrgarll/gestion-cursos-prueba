@@ -14,14 +14,14 @@
 <ul>
 	<li><a href="<c:url value='/'/>">Home</a></li>
 	<li><a href="<c:url value='/cursos'/>">Gestor Cursos</a></li>
-    <li><a href="#">Importar fichero datos</a></li>
-
 </ul>
 </nav>
 <main>
 <section id="listadoCursos">
+
 <header><h2>Listado de cursos</h2></header>
 <a href="<c:url value='/cursos/addCurso' />">Nuevo</a>
+<a href="<c:url value='/cursos/importarArchivo' />">Importar fichero datos</a>
 <table>
 	<thead>
 		<tr>

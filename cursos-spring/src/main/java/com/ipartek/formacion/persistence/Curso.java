@@ -19,7 +19,7 @@ public class Curso implements Serializable,Comparable<Curso> {
 		super();
 		this.id=ID_NULO;
 		this.nombre="";
-		this.codigo="";
+		this.codigo="000000000000";
 	}
 	public String getCodigo() {
 		return codigo;
